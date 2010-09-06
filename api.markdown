@@ -23,7 +23,7 @@ Todos los ejemplos en esta documentación puede ser corridos en forma similar.
 
 
 
-## Standard Modules
+## Módulos Estándar
 
 Node viene con un número de módulos que se compilan en el proceso, mayoría de los cuales se documentan a continuación.
 La manera más común para usar estos módulos es con `require('name')` y luego asignar el valor devuelto a una variable local con el mismo nombre que el módulo.
