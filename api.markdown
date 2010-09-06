@@ -14,7 +14,7 @@ Un ejemplo de un web server escrito con Node el cual responde con 'Hola Mundo':
 
     console.log('Server corriendo en http://127.0.0.1:8124/');
 
-Para correr el server, ponga el código dentro de un archivo llamado `ejemplo.js` y ejecútelo con el programa node
+Para correr el server, copie el código dentro de un archivo llamado `ejemplo.js` y ejecútelo con el programa node
 
     > node ejemplo.js
     Server corriendo en http://127.0.0.1:8124/
@@ -25,16 +25,13 @@ Todos los ejemplos en esta documentación puede ser corridos en forma similar.
 
 ## Standard Modules
 
-Node comes with a number of modules that are compiled in to the process,
-most of which are documented below.  The most common way to use these modules
-is with `require('name')` and then assigning the return value to a local
-variable with the same name as the module.
+Node viene con un número de módulos que se compilan en el proceso, mayoría de los cuales se documentan a continuación.
+La manera más común para usar estos módulos es con `require('name')` y luego asignar el valor devuelto a una variable local con el mismo nombre que el módulo.
 
-Example:
-
+Ejemplo:
     var sys = require('sys');
-    
-It is possible to extend node with other modules.  See `'Modules'`
+
+Es posible extender node con otros módulos. Ver `'Modulos'`
 
 
 ## Buffers
