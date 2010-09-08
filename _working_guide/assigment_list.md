@@ -1,5 +1,4 @@
 
-
 Asignaciónación de capitulos para traducir
 ==========================================
 
@@ -9,6 +8,7 @@ Cuando un usuario se hace responsable de un capítulo implica (idealmente) que n
 
 ## Asignaciones
 
-* 2010-09-07	Damian Suarez 	- Synopsis
+* 2010-09-07	Damian Suarez
+								- Synopsis
 								- Standard Modules
 								- Buffers
