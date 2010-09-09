@@ -12,3 +12,7 @@ Cuando un usuario se hace responsable de un capítulo implica (idealmente) que n
 								- Synopsis
 								- Standard Modules
 								- Buffers
+
+* 2010-09-08  Aldo Escudero
+                - EventEmitter
+                - Streams
