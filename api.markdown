@@ -198,42 +198,50 @@ from the original Buffer.
 
 ## EventEmitter
 
-Many objects in Node emit events: a TCP server emits an event each time
-there is a stream, a child process emits an event when it exits. All
-objects which emit events are instances of `events.EventEmitter`.
+Muchos objetos en Node emiten eventos: un servidor TCP emite un evento
+cada vez que hay un stream, un proceso hijo emite un evento al salir. 
+Todos los objetos que emiten eventos son instancias de `events.EventEmitter`.
 
-Events are represented by a camel-cased string. Here are some examples:
+Los eventos se representan mediante una cadena con estilo camel case. Algunos
+ejemplos podrían ser: 
 `'stream'`, `'data'`, `'messageBegin'`.
 
-Functions can be then be attached to objects, to be executed when an event
-is emitted. These functions are called _listeners_.
+De esta manera, podemos agregar funciones a los objetos, para ser ejecutadas
+cuando un evento es emitido. Estas funciones son llamadas _listeners_.
 
-`require('events').EventEmitter` to access the `EventEmitter` class.
+`require('events').EventEmitter` para acceder a la clase `EventEmitter`.
 
-All EventEmitters emit the event `'newListener'` when new listeners are
-added.
+Todos los emisores de eventos (EventEmitters) emiten el evento `'newListener'`
+al ser agregadas nuevas funciones listeners.
 
 When an `EventEmitter` experiences an error, the typical action is to emit an
 `'error'` event.  Error events are special--if there is no handler for them
 they will print a stack trace and exit the program.
 
-### Event: 'newListener'
+Cuando un `EventEmitter` encuentra un error, la acción usual a tomar es emitir
+un evento `'error'`. Los eventos de error son especiales--si no hay un handler
+para ellos, mostrarán un stack trace y detendrán el programa.
+
+
+### Evento: 'newListener'
 
 `function (event, listener) { }`
 
-This event is emitted any time someone adds a new listener.
+Este evento se emite al ser agregado un nuevo listener.
 
-### Event: 'error'
+### Evento: 'error'
 
 `function (exception) { }`
 
-If an error was encountered, then this event is emitted. This event is
-special - when there are no listeners to receive the error Node will
-terminate execution and display the exception's stack trace.
+Este evento es emitido al ser encontrado un error. Este evento es
+especial - cuando no existen funciones listeners que reciban el error,
+Node terminará la ejecución y presentará el stack trace de las
+excepciones.
 
 ### emitter.on(event, listener)
 
-Adds a listener to the end of the listeners array for the specified event.
+Agrega una función listener al final del arreglo de funciones listeners
+para el evento especificado.
 
     server.on('stream', function (stream) {
       console.log('someone connected!');
@@ -242,8 +250,10 @@ Adds a listener to the end of the listeners array for the specified event.
 
 ### emitter.removeListener(event, listener)
 
-Remove a listener from the listener array for the specified event.
-**Caution**: changes array indices in the listener array behind the listener.
+Elimina una función listener del arreglo de funciones listeners para
+el evento especificado.
+**Precaucíón**: esto modifica los índices del array en el arreglo de
+listeners detrás del listener. 
 
     var callback = function(stream) {
 	  console.log('someone connected!');
@@ -255,13 +265,14 @@ Remove a listener from the listener array for the specified event.
 
 ### emitter.removeAllListeners(event)
 
-Removes all listeners from the listener array for the specified event.
+Elimina todos los listeners del arreglo de listeners para el evento
+especificado.
 
 
 ### emitter.listeners(event)
 
-Returns an array of listeners for the specified event. This array can be
-manipulated, e.g. to remove listeners.
+Devuelve un arreglo de listeners para el evento especificado. Este arreglo
+puede ser modificado. Ej.: para eliminar listeners. 
 
     server.on('stream', function (stream) {
       console.log('someone connected!');
@@ -273,6 +284,7 @@ manipulated, e.g. to remove listeners.
 ### emitter.emit(event, [arg1], [arg2], [...])
 
 Execute each of the listeners in order with the supplied arguments.
+Ejecuta cada uno de los listeners de acuerdo al orden de los argumentos.
 
 
 
