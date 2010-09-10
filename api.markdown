@@ -283,7 +283,6 @@ puede ser modificado. Ej.: para eliminar listeners.
 
 ### emitter.emit(event, [arg1], [arg2], [...])
 
-Execute each of the listeners in order with the supplied arguments.
 Ejecuta cada uno de los listeners de acuerdo al orden de los argumentos.
 
 
