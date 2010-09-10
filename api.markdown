@@ -214,10 +214,6 @@ cuando un evento es emitido. Estas funciones son llamadas _listeners_.
 Todos los emisores de eventos (EventEmitters) emiten el evento `'newListener'`
 al ser agregadas nuevas funciones listeners.
 
-When an `EventEmitter` experiences an error, the typical action is to emit an
-`'error'` event.  Error events are special--if there is no handler for them
-they will print a stack trace and exit the program.
-
 Cuando un `EventEmitter` encuentra un error, la acción usual a tomar es emitir
 un evento `'error'`. Los eventos de error son especiales--si no hay un handler
 para ellos, mostrarán un stack trace y detendrán el programa.
