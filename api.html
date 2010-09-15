@@ -34,51 +34,47 @@ La manera más común para usar estos módulos es con <code>require('name')</cod
 
 <h2>Buffers</h2>
 
-<p>Pure Javascript is Unicode friendly but not nice to binary data.  When
-dealing with TCP streams or the file system, it's necessary to handle octet
-streams. Node has several strategies for manipulating, creating, and
-consuming octet streams.</p>
+<p>Javascript es un Unicode amigable pero no es agradable para datos binarios. Cuando
+se trata de streams TCP o de un sistema de archivos es necesario manejar bytes.
+Node tiene muchas estrategias para manipular, crear y consumir bytes.</p>
 
-<p>Raw data is stored in instances of the <code>Buffer</code> class. A <code>Buffer</code> is similar
-to an array of integers but corresponds to a raw memory allocation outside
-the V8 heap. A <code>Buffer</code> cannot be resized.</p>
+<p>Los datos en bruto se almacenan en instancias de la clase <code>Buffer</code>.
+Un <code>Buffer</code> es similar a un array de enteros pero el cual corresponde a una asignación de memoria en bruto fuera de la pila de V8.
+Un <code>Buffer</code> no pude ser redimensionado.</p>
 
-<p>The <code>Buffer</code> object is global.</p>
+<p>El <code>Buffer</code> es un objeto global.</p>
 
-<p>Converting between Buffers and JavaScript string objects requires an explicit encoding
-method.  Here are the different string encodings;</p>
+<p>La conversión entre Buffers y objetos string de javascript requiere un método explícito de codificación.
+Aquí están las diferentes codificaciones de strings;</p>
 
 <ul>
-<li><p><code>'ascii'</code> - for 7 bit ASCII data only.  This encoding method is very fast, and will
-strip the high bit if set.</p></li>
-<li><p><code>'utf8'</code> - Unicode characters.  Many web pages and other document formats use UTF-8.</p></li>
-<li><p><code>'base64'</code> - Base64 string encoding.</p></li>
-<li><p><code>'binary'</code> - A way of encoding raw binary data into strings by using only
-the first 8 bits of each character. This encoding method is depreciated and
-should be avoided in favor of <code>Buffer</code> objects where possible. This encoding
-will be removed in future versions of Node.</p></li>
+<li><p><code>'ascii'</code> - sólo para 7 bit de datos ASCII.  Este método de codificación es muy rápido, y se desechará el bit más alto si se setea.</p></li>
+<li><p><code>'utf8'</code> - caracteres Unicode.  Muchas páginas webs y otros formatos de documentos utilizan UTF-8.</p></li>
+<li><p><code>'base64'</code> - codificacion de cadena en Base64.</p></li>
+<li><p><code>'binary'</code> - Una manera de codificar un dato binario en bruto dentro de strings es utilizando sólo los primeros 8 bits de cada caracter.
+Este método de codificación es despreciado y debería ser evitado a favor de los objectos <code>Buffer</code> cuando sea posible.
+Esta codificación será removida en futuras versiones de Node.</p></li>
 </ul>
 
 <h3>new Buffer(size)</h3>
 
-<p>Allocates a new buffer of <code>size</code> octets.</p>
+<p>Asigna un nuevo buffer de <code>size</code> de octetos/bytes.</p>
 
 <h3>new Buffer(array)</h3>
 
-<p>Allocates a new buffer using an <code>array</code> of octets.</p>
+<p>Asigna un nuevo buffer utilizando un <code>array</code> de octetos/bytes.</p>
 
 <h3>new Buffer(str, encoding='utf8')</h3>
 
-<p>Allocates a new buffer containing the given <code>str</code>.</p>
+<p>Asigna un nuevo buffer asignando el <code>str</code> dado.</p>
 
 <h3>buffer.write(string, offset=0, encoding='utf8')</h3>
 
-<p>Writes <code>string</code> to the buffer at <code>offset</code> using the given encoding. Returns
-number of octets written.  If <code>buffer</code> did not contain enough space to fit
-the entire string it will write a partial amount of the string. In the case
-of <code>'utf8'</code> encoding, the method will not write partial characters.</p>
+<p>Escribe <code>string</code> al buffer con <code>offset</code> utilizando la codificación dada.
+Retorna el número de octetos/bytes escritos. Si <code>buffer</code> no contiene espacio suficiente para que entre el string completo escribirá una cantidad parcial del string.
+En el caso de codificación <code>utf8</code>, el método escribirña caracteres parciales.</p>
 
-<p>Example: write a utf8 string into a buffer, then print it</p>
+<p>Ejemplo: escribe una cadena utf8 dentro de un bufer, luego lo imprime</p>
 
 <pre><code>buf = new Buffer(256);
 len = buf.write('\u00bd + \u00bc = \u00be', 0);
@@ -89,17 +85,15 @@ console.log(len + " bytes: " + buf.toString('utf8', 0, len));
 
 <h3>buffer.toString(encoding, start=0, end=buffer.length)</h3>
 
-<p>Decodes and returns a string from buffer data encoded with <code>encoding</code>
-beginning at <code>start</code> and ending at <code>end</code>.</p>
+<p>Decodifica y retorna un string desde los datos del buffer codificando con <code>encoding</code> comenzando en <code>start</code> y finalizando en <code>end</code>.</p>
 
-<p>See <code>buffer.write()</code> example, above.</p>
+<p>Ver above el ejemplo <code>buffer.write()</code>.</p>
 
 <h3>buffer[index]</h3>
 
-<p>Get and set the octet at <code>index</code>. The values refer to individual bytes,
-so the legal range is between <code>0x00</code> and <code>0xFF</code> hex or <code>0</code> and <code>255</code>.</p>
+<p>Toma y setea el octeto en <code>index</code>. Los valores se refierens a los bytes individuales, por lo que el rango permitido es entre <code>0x00</code> y <code>0xFF</code> en hexa o <code>0</code> y <code>255</code>.</p>
 
-<p>Example: copy an ASCII string into a buffer, one byte at a time:</p>
+<p>Ejemplo: copia un string ASCII dentro del buffer, un byte a la vez.</p>
 
 <pre><code>str = "node.js";
 buf = new Buffer(str.length);
@@ -115,11 +109,10 @@ console.log(buf);
 
 <h3>Buffer.byteLength(string, encoding='utf8')</h3>
 
-<p>Gives the actual byte length of a string.  This is not the same as 
-<code>String.prototype.length</code> since that returns the number of <em>characters</em> in a
-string.</p>
+<p>Da la real longitud del byte de un string.
+No es lo mismo que <code>String.prototype.length</code> ya que retorna el número de <em>caracteres</em> en un string.</p>
 
-<p>Example:</p>
+<p>Ejemplo:</p>
 
 <pre><code>str = '\u00bd + \u00bc = \u00be';
 
