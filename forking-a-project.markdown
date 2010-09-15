@@ -37,40 +37,42 @@ Es posible extender node con otros módulos. Ver `'Modulos'`
 ## Buffers
 
 Javascript es un Unicode amigable pero no es agradable para datos binarios. Cuando
-se trata de streams TCP o de un sistema de archivos es necesario manejar bytes.
-Node tiene muchas estrategias para manipular, crear y consumir bytes.
+se trata de streams TCP o de un sistema de archivos, es necesario manejar octet streams.
+Node tiene muchas estrategias para manipular, crear y consumir octet streams.
 
 Los datos en bruto se almacenan en instancias de la clase `Buffer`.
-Un `Buffer` es similar a un array de enteros pero el cual corresponde a una asignación de memoria en bruto fuera de la pila de V8.
+Un `Buffer` es similar a un array de enteros pero que corresponde a una asignación de memoria en bruto fuera de la pila de V8.
 Un `Buffer` no pude ser redimensionado.
 
 El `Buffer` es un objeto global.
 
-La conversión entre Buffers y objetos string de javascript requiere un método explícito de codificación.
-Aquí están las diferentes codificaciones de strings;
+Converting between Buffers and JavaScript string objects requires an explicit encoding
+method.  Here are the different string encodings;
 
-* `'ascii'` - sólo para 7 bit de datos ASCII.  Este método de codificación es muy rápido, y se desechará el bit más alto si se setea.
+* `'ascii'` - for 7 bit ASCII data only.  This encoding method is very fast, and will
+strip the high bit if set.
 
-* `'utf8'` - caracteres Unicode.  Muchas páginas webs y otros formatos de documentos utilizan UTF-8.
+* `'utf8'` - Unicode characters.  Many web pages and other document formats use UTF-8.
 
-* `'base64'` - codificacion de cadena en Base64.
+* `'base64'` - Base64 string encoding.
 
-* `'binary'` - Una manera de codificar un dato binario en bruto dentro de strings es utilizando sólo los primeros 8 bits de cada caracter.
-Este método de codificación es despreciado y debería ser evitado a favor de los objectos `Buffer` cuando sea posible.
-Esta codificación será removida en futuras versiones de Node.
+* `'binary'` - A way of encoding raw binary data into strings by using only
+the first 8 bits of each character. This encoding method is depreciated and
+should be avoided in favor of `Buffer` objects where possible. This encoding
+will be removed in future versions of Node.
 
 
 ### new Buffer(size)
 
-Asigna un nuevo buffer de `size` de octetos/bytes.
+Allocates a new buffer of `size` octets.
 
 ### new Buffer(array)
 
-Asigna un nuevo buffer utilizando un `array` de octetos/bytes.
+Allocates a new buffer using an `array` of octets.
 
 ### new Buffer(str, encoding='utf8')
 
-Asigna un nuevo buffer el `str` dado.
+Allocates a new buffer containing the given `str`.
 
 ### buffer.write(string, offset=0, encoding='utf8')
 
