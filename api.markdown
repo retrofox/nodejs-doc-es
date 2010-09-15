@@ -70,38 +70,35 @@ Asigna un nuevo buffer utilizando un `array` de octetos/bytes.
 
 ### new Buffer(str, encoding='utf8')
 
-Asigna un nuevo buffer el `str` dado.
+Asigna un nuevo buffer asignando el `str` dado.
 
 ### buffer.write(string, offset=0, encoding='utf8')
 
-Writes `string` to the buffer at `offset` using the given encoding. Returns
-number of octets written.  If `buffer` did not contain enough space to fit
-the entire string it will write a partial amount of the string. In the case
-of `'utf8'` encoding, the method will not write partial characters.
+Escribe `string` al buffer con `offset` utilizando la codificación dada.
+Retorna el número de octetos/bytes escritos. Si `buffer` no contiene espacio suficiente para que entre el string completo escribirá una cantidad parcial del string.
+En el caso de codificación `utf8`, el método escribirña caracteres parciales.
 
-Example: write a utf8 string into a buffer, then print it
+Ejemplo: escribe una cadena utf8 dentro de un bufer, luego lo imprime
 
     buf = new Buffer(256);
     len = buf.write('\u00bd + \u00bc = \u00be', 0);
     console.log(len + " bytes: " + buf.toString('utf8', 0, len));
 
     // 12 bytes: ½ + ¼ = ¾
-    
+
 
 ### buffer.toString(encoding, start=0, end=buffer.length)
 
-Decodes and returns a string from buffer data encoded with `encoding`
-beginning at `start` and ending at `end`.
+Decodifica y retorna un string desde los datos del buffer codificando con `encoding` comenzando en `start` y finalizando en `end`.
 
-See `buffer.write()` example, above.
+Ver above el ejemplo `buffer.write()`.
 
 
 ### buffer[index]
 
-Get and set the octet at `index`. The values refer to individual bytes,
-so the legal range is between `0x00` and `0xFF` hex or `0` and `255`.
+Toma y setea el octeto en `index`. Los valores se refierens a los bytes individuales, por lo que el rango permitido es entre `0x00` y `0xFF` en hexa o `0` y `255`.
 
-Example: copy an ASCII string into a buffer, one byte at a time:
+Ejemplo: copia un string ASCII dentro del buffer, un byte a la vez.
 
     str = "node.js";
     buf = new Buffer(str.length);
@@ -117,11 +114,10 @@ Example: copy an ASCII string into a buffer, one byte at a time:
 
 ### Buffer.byteLength(string, encoding='utf8')
 
-Gives the actual byte length of a string.  This is not the same as 
-`String.prototype.length` since that returns the number of *characters* in a
-string.
+Da la real longitud del byte de un string.
+No es lo mismo que `String.prototype.length` ya que retorna el número de *caracteres* en un string.
 
-Example:
+Ejemplo:
 
     str = '\u00bd + \u00bc = \u00be';
 
