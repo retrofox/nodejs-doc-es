@@ -330,8 +330,6 @@ Es emitido cuando el archivo descriptor es recibido en el stream. Solo streams
 de Unix soportan esta funcionalidad; los demás, simplemente nunca emitirán este
 evento.
 
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 ### stream.readable
 
 A boolean that is `true` by default, but turns `false` after an `'error'`
