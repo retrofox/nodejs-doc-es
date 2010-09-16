@@ -131,7 +131,7 @@ Ejemplo:
 
 ### buffer.length
 
-El tamaño del buffer en bytes, Note que esto no es necesariemente el tamaño del contenido.
+El tamaño del buffer en bytes. Note que esto no es necesariemente el tamaño del contenido.
 `length` se refiere a la cantidad de memoria asignada para el objeto buffer.
 Este no cambia cuando el contenido del buffer cambia.
 
@@ -168,11 +168,10 @@ Ejemplo: crear dos Buffers, luego copiar `buf1` desde el byte 16 a hasta el byte
 
 ### buffer.slice(start, end)
 
-Retorna un nuevo buffer el cual referencia la misma memoria que el original, pero desplaza y copia por los índices `start` y `end`.
+Retorna un nuevo buffer el cual referencia la misma memoria que el original, pero desplaza y copia a través de los índices `start` y `end`.
 
 **Modificando el slice del nuevo buffer modificará la memoria en el buffer original !**
 Ejemplo: crear un Buffer con el alfabeto en ASCII, hacer un slice, luego modificar un byte desde el Buffer original.
-from the original Buffer.
 
     var buf1 = new Buffer(26);
 
