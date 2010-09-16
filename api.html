@@ -39,8 +39,10 @@ se trata de streams TCP o de un sistema de archivos es necesario manejar bytes.
 Node tiene muchas estrategias para manipular, crear y consumir bytes.</p>
 
 <p>Los datos en bruto se almacenan en instancias de la clase <code>Buffer</code>.
-Un <code>Buffer</code> es similar a un array de enteros pero el cual corresponde a una asignación de memoria en bruto fuera de la pila de V8.
+Un <code>Buffer</code> es similar a un array de enteros pero se corresponde a una asignación de memoria en bruto fuera de la pila de V8.
 Un <code>Buffer</code> no pude ser redimensionado.</p>
+
+<p>NdT: octect streams ~= streams de octetos ~= bytes</p>
 
 <p>El <code>Buffer</code> es un objeto global.</p>
 
@@ -48,7 +50,7 @@ Un <code>Buffer</code> no pude ser redimensionado.</p>
 Aquí están las diferentes codificaciones de strings;</p>
 
 <ul>
-<li><p><code>'ascii'</code> - sólo para 7 bit de datos ASCII.  Este método de codificación es muy rápido, y se desechará el bit más alto si se setea.</p></li>
+<li><p><code>'ascii'</code> - sólo para 7 bit de datos ASCII.  Este método de codificación es muy rápido y se desechará el bit más alto si es seteado.</p></li>
 <li><p><code>'utf8'</code> - caracteres Unicode.  Muchas páginas webs y otros formatos de documentos utilizan UTF-8.</p></li>
 <li><p><code>'base64'</code> - codificacion de cadena en Base64.</p></li>
 <li><p><code>'binary'</code> - Una manera de codificar un dato binario en bruto dentro de strings es utilizando sólo los primeros 8 bits de cada caracter.
@@ -58,7 +60,7 @@ Esta codificación será removida en futuras versiones de Node.</p></li>
 
 <h3>new Buffer(size)</h3>
 
-<p>Asigna un nuevo buffer de <code>size</code> de octetos/bytes.</p>
+<p>Asigna un nuevo buffer de tamaño <code>size</code> de octetos/bytes.</p>
 
 <h3>new Buffer(array)</h3>
 
@@ -70,8 +72,8 @@ Esta codificación será removida en futuras versiones de Node.</p></li>
 
 <h3>buffer.write(string, offset=0, encoding='utf8')</h3>
 
-<p>Escribe <code>string</code> al buffer con <code>offset</code> utilizando la codificación dada.
-Retorna el número de octetos/bytes escritos. Si <code>buffer</code> no contiene espacio suficiente para que entre el string completo escribirá una cantidad parcial del string.
+<p>Escribe un <code>string</code> en el buffer con <code>offset</code> utilizando la codificación dada.
+Retorna el número de bytes escritos. Si <code>buffer</code> no contiene espacio suficiente para que entre el string completo escribirá una cantidad parcial del string.
 En el caso de codificación <code>utf8</code>, el método escribirña caracteres parciales.</p>
 
 <p>Ejemplo: escribe una cadena utf8 dentro de un bufer, luego lo imprime</p>
@@ -87,11 +89,11 @@ console.log(len + " bytes: " + buf.toString('utf8', 0, len));
 
 <p>Decodifica y retorna un string desde los datos del buffer codificando con <code>encoding</code> comenzando en <code>start</code> y finalizando en <code>end</code>.</p>
 
-<p>Ver above el ejemplo <code>buffer.write()</code>.</p>
+<p>Ver arriba el ejemplo <code>buffer.write()</code>.</p>
 
 <h3>buffer[index]</h3>
 
-<p>Toma y setea el octeto en <code>index</code>. Los valores se refierens a los bytes individuales, por lo que el rango permitido es entre <code>0x00</code> y <code>0xFF</code> en hexa o <code>0</code> y <code>255</code>.</p>
+<p>Toma y setea el byte en <code>index</code>. Los valores se refieren a los bytes individuales, por lo que el rango permitido es entre <code>0x00</code> y <code>0xFF</code> en hexa o <code>0</code> y <code>255</code>.</p>
 
 <p>Ejemplo: copia un string ASCII dentro del buffer, un byte a la vez.</p>
 
@@ -124,9 +126,11 @@ console.log(str + ": " + str.length + " characters, " +
 
 <h3>buffer.length</h3>
 
-<p>The size of the buffer in bytes.  Note that this is not necessarily the size
-of the contents. <code>length</code> refers to the amount of memory allocated for the 
-buffer object.  It does not change when the contents of the buffer are changed.</p>
+<p>El tamaño del buffer en bytes, Note que esto no es necesariemente el tamaño del contenido.
+<code>length</code> se refiere a la cantidad de memoria asignada para el objeto buffer.
+Este no cambia cuando el contenido del buffer cambia.</p>
+
+<p>Ejemplo:</p>
 
 <pre><code>buf = new Buffer(1234);
 
@@ -140,10 +144,9 @@ console.log(buf.length);
 
 <h3>buffer.copy(targetBuffer, targetStart, sourceStart, sourceEnd=buffer.length)</h3>
 
-<p>Does a memcpy() between buffers.</p>
+<p>Realiza un memcpy() entre buffers.</p>
 
-<p>Example: build two Buffers, then copy <code>buf1</code> from byte 16 through byte 19
-into <code>buf2</code>, starting at the 8th byte in <code>buf2</code>.</p>
+<p>Ejemplo: crear dos Buffers, luego copiar <code>buf1</code> desde el byte 16 a hasta el byte 19 dentro de <code>buf2</code>, comenzando en el octavo byte en <code>buf2</code>.</p>
 
 <pre><code>buf1 = new Buffer(26);
 buf2 = new Buffer(26);
@@ -161,19 +164,16 @@ console.log(buf2.toString('ascii', 0, 25));
 
 <h3>buffer.slice(start, end)</h3>
 
-<p>Returns a new buffer which references the
-same memory as the old, but offset and cropped by the <code>start</code> and <code>end</code>
-indexes.</p>
+<p>Retorna un nuevo buffer el cual referencia la misma memoria que el original, pero desplaza y copia por los índices <code>start</code> y <code>end</code>.</p>
 
-<p><strong>Modifying the new buffer slice will modify memory in the original buffer!</strong></p>
-
-<p>Example: build a Buffer with the ASCII alphabet, take a slice, then modify one byte
+<p><strong>Modificando el slice del nuevo buffer modificará la memoria en el buffer original !</strong>
+Ejemplo: crear un Buffer con el alfabeto en ASCII, hacer un slice, luego modificar un byte desde el Buffer original.
 from the original Buffer.</p>
 
 <pre><code>var buf1 = new Buffer(26);
 
 for (var i = 0 ; i &lt; 26 ; i++) {
-  buf1[i] = i + 97; // 97 is ASCII a
+  buf1[i] = i + 97; // 97 es 'a' en ASCII
 }
 
 var buf2 = buf1.slice(0, 3);
@@ -314,8 +314,6 @@ todos los streams lo emitirán. Por ejemplo, una solicitud HTTP no emitirá
 <p>Es emitido cuando el archivo descriptor es recibido en el stream. Solo streams
 de Unix soportan esta funcionalidad; los demás, simplemente nunca emitirán este
 evento.</p>
-
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
 
 <h3>stream.readable</h3>
 
