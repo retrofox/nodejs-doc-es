@@ -41,15 +41,17 @@ se trata de streams TCP o de un sistema de archivos es necesario manejar bytes.
 Node tiene muchas estrategias para manipular, crear y consumir bytes.
 
 Los datos en bruto se almacenan en instancias de la clase `Buffer`.
-Un `Buffer` es similar a un array de enteros pero el cual corresponde a una asignación de memoria en bruto fuera de la pila de V8.
+Un `Buffer` es similar a un array de enteros pero se corresponde a una asignación de memoria en bruto fuera de la pila de V8.
 Un `Buffer` no pude ser redimensionado.
+
+NdT: octect streams ~= streams de octetos ~= bytes
 
 El `Buffer` es un objeto global.
 
 La conversión entre Buffers y objetos string de javascript requiere un método explícito de codificación.
 Aquí están las diferentes codificaciones de strings;
 
-* `'ascii'` - sólo para 7 bit de datos ASCII.  Este método de codificación es muy rápido, y se desechará el bit más alto si se setea.
+* `'ascii'` - sólo para 7 bit de datos ASCII.  Este método de codificación es muy rápido y se desechará el bit más alto si es seteado.
 
 * `'utf8'` - caracteres Unicode.  Muchas páginas webs y otros formatos de documentos utilizan UTF-8.
 
@@ -62,7 +64,7 @@ Esta codificación será removida en futuras versiones de Node.
 
 ### new Buffer(size)
 
-Asigna un nuevo buffer de `size` de octetos/bytes.
+Asigna un nuevo buffer de tamaño `size` de octetos/bytes.
 
 ### new Buffer(array)
 
@@ -74,8 +76,8 @@ Asigna un nuevo buffer asignando el `str` dado.
 
 ### buffer.write(string, offset=0, encoding='utf8')
 
-Escribe `string` al buffer con `offset` utilizando la codificación dada.
-Retorna el número de octetos/bytes escritos. Si `buffer` no contiene espacio suficiente para que entre el string completo escribirá una cantidad parcial del string.
+Escribe un `string` en el buffer con `offset` utilizando la codificación dada.
+Retorna el número de bytes escritos. Si `buffer` no contiene espacio suficiente para que entre el string completo escribirá una cantidad parcial del string.
 En el caso de codificación `utf8`, el método escribirña caracteres parciales.
 
 Ejemplo: escribe una cadena utf8 dentro de un bufer, luego lo imprime
@@ -91,12 +93,12 @@ Ejemplo: escribe una cadena utf8 dentro de un bufer, luego lo imprime
 
 Decodifica y retorna un string desde los datos del buffer codificando con `encoding` comenzando en `start` y finalizando en `end`.
 
-Ver above el ejemplo `buffer.write()`.
+Ver arriba el ejemplo `buffer.write()`.
 
 
 ### buffer[index]
 
-Toma y setea el octeto en `index`. Los valores se refierens a los bytes individuales, por lo que el rango permitido es entre `0x00` y `0xFF` en hexa o `0` y `255`.
+Toma y setea el byte en `index`. Los valores se refieren a los bytes individuales, por lo que el rango permitido es entre `0x00` y `0xFF` en hexa o `0` y `255`.
 
 Ejemplo: copia un string ASCII dentro del buffer, un byte a la vez.
 
@@ -129,9 +131,11 @@ Ejemplo:
 
 ### buffer.length
 
-The size of the buffer in bytes.  Note that this is not necessarily the size
-of the contents. `length` refers to the amount of memory allocated for the 
-buffer object.  It does not change when the contents of the buffer are changed.
+El tamaño del buffer en bytes, Note que esto no es necesariemente el tamaño del contenido.
+`length` se refiere a la cantidad de memoria asignada para el objeto buffer.
+Este no cambia cuando el contenido del buffer cambia.
+
+Ejemplo:
 
     buf = new Buffer(1234);
 
@@ -144,10 +148,9 @@ buffer object.  It does not change when the contents of the buffer are changed.
 
 ### buffer.copy(targetBuffer, targetStart, sourceStart, sourceEnd=buffer.length)
 
-Does a memcpy() between buffers.
+Realiza un memcpy() entre buffers.
 
-Example: build two Buffers, then copy `buf1` from byte 16 through byte 19
-into `buf2`, starting at the 8th byte in `buf2`.
+Ejemplo: crear dos Buffers, luego copiar `buf1` desde el byte 16 a hasta el byte 19 dentro de `buf2`, comenzando en el octavo byte en `buf2`.
 
     buf1 = new Buffer(26);
     buf2 = new Buffer(26);
@@ -165,19 +168,16 @@ into `buf2`, starting at the 8th byte in `buf2`.
 
 ### buffer.slice(start, end)
 
-Returns a new buffer which references the
-same memory as the old, but offset and cropped by the `start` and `end`
-indexes.
+Retorna un nuevo buffer el cual referencia la misma memoria que el original, pero desplaza y copia por los índices `start` y `end`.
 
-**Modifying the new buffer slice will modify memory in the original buffer!**
-
-Example: build a Buffer with the ASCII alphabet, take a slice, then modify one byte
+**Modificando el slice del nuevo buffer modificará la memoria en el buffer original !**
+Ejemplo: crear un Buffer con el alfabeto en ASCII, hacer un slice, luego modificar un byte desde el Buffer original.
 from the original Buffer.
 
     var buf1 = new Buffer(26);
 
     for (var i = 0 ; i < 26 ; i++) {
-      buf1[i] = i + 97; // 97 is ASCII a
+      buf1[i] = i + 97; // 97 es 'a' en ASCII
     }
 
     var buf2 = buf1.slice(0, 3);
@@ -323,7 +323,6 @@ Es emitido cuando el archivo descriptor es recibido en el stream. Solo streams
 de Unix soportan esta funcionalidad; los demás, simplemente nunca emitirán este
 evento.
 
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 ### stream.readable
 
