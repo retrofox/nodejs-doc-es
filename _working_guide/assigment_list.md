@@ -9,10 +9,14 @@ Cuando un usuario se hace responsable de un capítulo implica (idealmente) que n
 ## Asignaciones
 
 * 2010-09-07	Damian Suarez
-								- Synopsis
-								- Standard Modules
-								- Buffers
+		- Synopsis
+		- Standard Modules
+		- Buffers
 
 * 2010-09-08  Aldo Escudero
                 - EventEmitter
                 - Streams
+
+* 2010-09-15	Damian Suarez
+		- HTTP
+		- http.Client
