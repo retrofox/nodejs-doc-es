@@ -1907,13 +1907,13 @@ followed by `response.end()`.
 
 ## http.Client
 
-An HTTP client is constructed with a server address as its
-argument, the returned handle is then used to issue one or more
-requests.  Depending on the server connected to, the client might
-pipeline the requests or reestablish the stream after each
-stream. _Currently the implementation does not pipeline requests._
+Un cliente HTTP es construído con una dirección de server como argumento,
+el handle devuelto es luego usado para hacer uno o más requests.
+En función del server conectado, el cliente puede pipeline(segmentar) los requests
+o reestablecer el stream después de cada stream.
+_Actualmente la implementación no solicita el pipeline._
 
-Example of connecting to `google.com`:
+Ejemplo de conexión a `google.com`:
 
     var http = require('http');
     var google = http.createClient(80, 'www.google.com');
@@ -1929,15 +1929,14 @@ Example of connecting to `google.com`:
       });
     });
 
-There are a few special headers that should be noted.
+Hay unos pocos headers especiales a tener en cuenta.
 
-* The 'Host' header is not added by Node, and is usually required by
-  website.
+* El header `Host` no es agregado por Node, y es por lo general es requerido por el sitio web.
 
-* Sending a 'Connection: keep-alive' will notify Node that the connection to
-  the server should be persisted until the next request.
+* Enviando una 'Connection: keep-alive' notificará a Node que la conexión al server
+  debe ser persistente la próxima petición.
 
-* Sending a 'Content-length' header will disable the default chunked encoding.
+* Enviando un header 'Content-length' deshabilitará chunked encoding por (habilitado por defecto).
 
 
 ### Event: 'upgrade'
