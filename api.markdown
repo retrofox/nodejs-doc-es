@@ -1625,15 +1625,17 @@ Returns a new WriteStream object (See `Writable Stream`).
 
 ## HTTP
 
-To use the HTTP server and client one must `require('http')`.
+Para usar HTTP server y client debemos utilizar `require('http')`.
 
-The HTTP interfaces in Node are designed to support many features
-of the protocol which have been traditionally difficult to use.
-In particular, large, possibly chunk-encoded, messages. The interface is
-careful to never buffer entire requests or responses--the
-user is able to stream data.
+Las interfaces HTTP en Node están diseñadas para soportar características del
+protocolo que han sido tradicionalmente difíciles de utilizar.
+En particular mensajes enormes posiblemente utilizando chunk-encoded.
+La interfaz es cuidadosa de nunca buffear (NdT) todos los requests o responses--el usuario puede acceder a los streams de datos.
 
-HTTP message headers are represented by an object like this:
+NdT: Buffear se interpreta como 'almacenar en memoria'
+
+
+Las headers HTML del mensaje están representadas por un objeto como este:
 
     { 'content-length': '123'
     , 'content-type': 'text/plain'
@@ -1641,14 +1643,14 @@ HTTP message headers are represented by an object like this:
     , 'accept': '*/*'
     }
 
-Keys are lowercased. Values are not modified.
+las claves están el minúsculas. Los valores no son modificados.
 
-In order to support the full spectrum of possible HTTP applications, Node's
-HTTP API is very low-level. It deals with stream handling and message
-parsing only. It parses a message into headers and body but it does not
-parse the actual headers or the body.
 
-HTTPS is supported if OpenSSL is available on the underlying platform.
+A fin de soportar todo el espectro de posibles aplicaciones HTTP, la API HTTP de Node es de muy bajo nivel.
+Se ocupa solamente de manipulación de stream y parsing de mensajes. Parsea un mensaje dentro de los headers y el body,
+pero no parsea el body o los headers reales.
+HTTPS es soportado si OpenSSL está disponible en la plataforma subyacente.
+
 
 ## http.Server
 
