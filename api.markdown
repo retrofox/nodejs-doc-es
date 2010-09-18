@@ -1931,23 +1931,22 @@ Ejemplo de conexión a `google.com`:
 
 Hay unos pocos headers especiales a tener en cuenta.
 
-* El header `Host` no es agregado por Node, y es por lo general es requerido por el sitio web.
+* El header `Host` no es agregado por Node, y por lo general es requerido por el sitio web.
 
 * Enviando una 'Connection: keep-alive' notificará a Node que la conexión al server
-  debe ser persistente la próxima petición.
+  debe ser persistente en la próxima petición.
 
-* Enviando un header 'Content-length' deshabilitará chunked encoding por (habilitado por defecto).
+* Enviando un header 'Content-length' deshabilitará chunked encoding (habilitado por defecto).
 
 
-### Event: 'upgrade'
+### Evento: 'upgrade'
 
 `function (request, socket, head)`
 
-Emitted each time a server responds to a request with an upgrade. If this event
-isn't being listened for, clients receiving an upgrade header will have their
-connections closed.
+Se emite cada vez que el server responde a una petición con un upgrade.
+Si este evento no está siendo escuchado, clientes esten recibiendo un 'upgrade header' van a tener sus conexiones cerradas.
 
-See the description of the `upgrade` event for `http.Server` for further details.
+Ver la descripción del evento `upgrade` para `http.Server` para más detalle.
 
 ### http.createClient(port, host='localhost', secure=false, [credentials])
 
