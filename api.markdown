@@ -1909,7 +1909,7 @@ followed by `response.end()`.
 
 Un cliente HTTP es construído con una dirección del servidor como argumento,
 el handle devuelto es luego usado para hacer una o más peticiones.
-En función del server conectado, el cliente puede pipeline(segmentar) las peticiones
+En función del servidor al cual se conecta, el cliente puede pipeline(segmentar) las peticiones
 o reestablecer el stream después de cada stream.
 _Actualmente la implementación no solicita el pipeline._
 
@@ -1971,7 +1971,7 @@ Emite un request, si es necesario establece un stream. Devuelve una instancia de
 Algunos headers adicionales del request pueden ser añadidos internamente por Node. Devuelve un objeto `ClientRequest`.
 
 Recuerda incluir el header `Content-Length` si planeas el envío completo de un body.
-Su la idea es el streaming del body, tal vez debas setear `Transfer-Encoding: chunked`.
+Si la idea es el streaming del body, tal vez debas setear `Transfer-Encoding: chunked`.
 
 *NOTA*: el request no está completo. Este método sólo envía el header de un request.
 Uno debe llamar `request.end()` para finalizar el request y obtener la respuesta.

@@ -1623,12 +1623,12 @@ start at 0.  When used, both the limits must be specified always.</p>
 
 <p>Las interfaces HTTP en Node están diseñadas para soportar características del
 protocolo que han sido tradicionalmente difíciles de utilizar.
-En particular mensajes enormes posiblemente utilizando chunk-encoded.
+En particular mensajes enormes; posiblemente utilizando chunk-encoded.
 La interfaz es cuidadosa de nunca buffear (NdT) todos los requests o responses--el usuario puede acceder a los streams de datos.</p>
 
 <p>NdT: Buffear se interpreta como 'almacenar en memoria'</p>
 
-<p>Las headers HTML del mensaje están representadas por un objeto como este:</p>
+<p>Los headers del mensaje HTML están representados por un objeto como este:</p>
 
 <pre><code>{ 'content-length': '123'
 , 'content-type': 'text/plain'
@@ -1637,7 +1637,7 @@ La interfaz es cuidadosa de nunca buffear (NdT) todos los requests o responses--
 }
 </code></pre>
 
-<p>las claves están el minúsculas. Los valores no son modificados.</p>
+<p>las claves están en minúsculas. Los valores no son modificados.</p>
 
 <p>A fin de soportar todo el espectro de posibles aplicaciones HTTP, la API HTTP de Node es de muy bajo nivel.
 Se ocupa solamente de manipulación de stream y parsing de mensajes. Parsea un mensaje dentro de los headers y el body,
@@ -1890,9 +1890,9 @@ followed by <code>response.end()</code>.</p>
 
 <h2>http.Client</h2>
 
-<p>Un cliente HTTP es construído con una dirección de server como argumento,
-el handle devuelto es luego usado para hacer uno o más requests.
-En función del server conectado, el cliente puede pipeline(segmentar) los requests
+<p>Un cliente HTTP es construído con una dirección del servidor como argumento,
+el handle devuelto es luego usado para hacer una o más peticiones.
+En función del server conectado, el cliente puede pipeline(segmentar) las peticiones
 o reestablecer el stream después de cada stream.
 <em>Actualmente la implementación no solicita el pipeline.</em></p>
 
@@ -1917,7 +1917,7 @@ request.on('response', function (response) {
 
 <ul>
 <li><p>El header <code>Host</code> no es agregado por Node, y por lo general es requerido por el sitio web.</p></li>
-<li><p>Enviando una 'Connection: keep-alive' notificará a Node que la conexión al server
+<li><p>Enviando una 'Connection: keep-alive' notificará a Node que la conexión al servidor
 debe ser persistente en la próxima petición.</p></li>
 <li><p>Enviando un header 'Content-length' deshabilitará chunked encoding (habilitado por defecto).</p></li>
 </ul>
@@ -1926,32 +1926,35 @@ debe ser persistente en la próxima petición.</p></li>
 
 <p><code>function (request, socket, head)</code></p>
 
-<p>Se emite cada vez que el server responde a una petición con un upgrade.
-Si este evento no está siendo escuchado, clientes esten recibiendo un 'upgrade header' van a tener sus conexiones cerradas.</p>
+<p>Se emite cada vez que el servidor responde a una petición con un upgrade.
+Si este evento no está siendo escuchado, los clientes que esten recibiendo un 'upgrade header' van a tener sus conexiones cerradas.</p>
 
-<p>Ver la descripción del evento <code>upgrade</code> para <code>http.Server</code> para más detalle.</p>
+<p>Ver la descripción del evento <code>upgrade</code> de <code>http.Server</code> para más detalle.</p>
 
 <h3>http.createClient(port, host='localhost', secure=false, [credentials])</h3>
 
 <p>Crea un nuevo cliente HTTP. <code>port</code> y <code>host</code> se refieren al servidor al cual se realiza la conexión.
 Un stream no se establece hasta que la petición es emitida.</p>
 
-<p><code>secure</code> es un boolean flag opcional para habilitar el soporte https
-y <code>credentials</code> es un objeto de credenciales opcional del módulo crypto, que podrá proceder a la clave privada del cliente, certificado, y una lista de certificados CA confiables.</p>
+<p><code>secure</code> es un flag booleano opcional para habilitar el soporte https
+y <code>credentials</code> es un objeto de credenciales opcional del módulo crypto,
+que podrá proceder a la clave privada del cliente, certificado, y una lista de certificados CA confiables.</p>
 
-<p>Si la conexión es segura pero no explícita los certificados CA son pasados a las credenciales, y luedo node.js seteará por defecto la lista pùblica de confianza de los certificados CA, como figura en http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt</p>
+<p>Si la conexión es segura pero no es explícita los certificados CA son pasados a las credenciales,
+y luedo node.js seteará por defecto la lista pública de confianza de los certificados CA,
+como figura en http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt</p>
 
 <h3>client.request(method='GET', path, [request_headers])</h3>
 
 <p>Emite un request, si es necesario establece un stream. Devuelve una instancia de <code>http.ClientRequest</code>.</p>
 
-<p><code>method</code> es opcional y por defecto es 'GET' si es omitido.</p>
+<p><code>method</code> es opcional y por defecto es 'GET'.</p>
 
 <p><code>request_headers</code> es opcional.
-headers adicionales del request pueden ser añadidos internamente por Node. Devuelve un objeto <code>ClientRequest</code>.</p>
+Algunos headers adicionales del request pueden ser añadidos internamente por Node. Devuelve un objeto <code>ClientRequest</code>.</p>
 
 <p>Recuerda incluir el header <code>Content-Length</code> si planeas el envío completo de un body.
-Su el plan es el streaming del body, tal vez debas setear <code>Transfer-Encoding: chunked</code>.</p>
+Su la idea es el streaming del body, tal vez debas setear <code>Transfer-Encoding: chunked</code>.</p>
 
 <p><em>NOTA</em>: el request no está completo. Este método sólo envía el header de un request.
 Uno debe llamar <code>request.end()</code> para finalizar el request y obtener la respuesta.
@@ -1959,11 +1962,13 @@ Uno debe llamar <code>request.end()</code> para finalizar el request y obtener l
 
 <h3>client.verifyPeer()</h3>
 
-<p>Devuelve true o false dependiendo de la validez del certificado del server en el contexto de lo definido; o los valores por defecto de la lista de confianza de certificados CA.</p>
+<p>Devuelve true o false dependiendo de la validez del certificado del servidor en el contexto de lo definido;
+o los valores por defecto de la lista de confianza de certificados CA.</p>
 
 <h3>client.getPeerCertificate()</h3>
 
-<p>Devuelve una estructura JSON detallando el certificado del server, conteniendo un diccionario con claves para el certificado de 'subject', 'issuer', 'valid_from' and 'valid_to'</p>
+<p>Devuelve una estructura JSON detallando el certificado del servidor,
+conteniendo un diccionario con claves para el certificado de 'subject', 'issuer', 'valid_from' and 'valid_to'</p>
 
 <h2>http.ClientRequest</h2>
 
@@ -1974,10 +1979,10 @@ Representa una petición <em>in-progress</em> cuya cabecera ya se ha enviado.</p
 <code>'response'</code> será emitido desde el objeto request cuando los headers de la respuesta hayan sido recibidos.
 El evento <code>'response'</code> es ejecutado con un argumento el cual es una instancia de <code>http.ClientResponse</code>.</p>
 
-<p>Durante el evento <code>'response'</code>, uno puede agregar listeners al objeto response; particularmente para escuchar el evento <code>'data'</code>.
+<p>Durante el evento <code>'response'</code>, uno puede agregar listeners al objeto response; en particual para escuchar el evento <code>'data'</code>.
 Tenga en cuenta que el evento <code>'response'</code> es llamado antes de que cualquier parte de la respuesta del body sea recibida,
 por lo que no hay necesidad de preocuparce para correr a capturar la primer parte del body.
-Mientras un listener para <code>'data'</code> es agregado durante el evento <code>'response'</code>, el body completo podrá ser capturado.</p>
+Mientras un listener <code>'data'</code> es agregado durante el evento <code>'response'</code>, el body completo podrá ser capturado.</p>
 
 <pre><code>// Bien
 request.on('response', function (response) {
@@ -2010,7 +2015,7 @@ El argumento <code>response</code> sera una intancia de <code>http.ClientRespons
 <h3>request.write(chunk, encoding='utf8')</h3>
 
 <p>Envía un chunk al body. Al llamar al método muchas veces, el usuario puede modificar el stream de un body del request a un servidor--
-en este caso se sugiere usar la linea <code>['Transfer-Encoding', 'chunked']</code> del header al crear la petición.</p>
+en este caso se sugiere usar la linea <code>['Transfer-Encoding', 'chunked']</code> en el header al crear la petición.</p>
 
 <p>El parámetro <code>chunk</code> debería ser un array de enteros o un string.</p>
 
@@ -2025,7 +2030,7 @@ lo meterá dentro del stream. Si una petición es chunkeada, esta enviará la te
 
 <h2>http.ClientResponse</h2>
 
-<p>Este objeto se crear al hacer una petición con <code>http.Client</code>.
+<p>Este objeto se crea al hacer una petición con <code>http.Client</code>.
 Es pasado al evento <code>'response'</code> del objeto request.</p>
 
 <p>La respuesta implementa la interface <code>Readable Stream</code>.</p>
@@ -2038,49 +2043,47 @@ Es pasado al evento <code>'response'</code> del objeto request.</p>
 
 <pre><code>Ejemplo: Un chunk del body como un único argumento.
 La codificación de transferencia ha sido decodificada.
-El body chunck un string. La codificación del body se establece con `response.setBodyEncoding()`.
+El body chunckea un string. La codificación del body se establece con `response.setBodyEncoding()`.
 </code></pre>
 
 <h3>Event: 'end'</h3>
 
 <p><code>function () {}</code></p>
 
-<p>Se emite exactamente una vez por cada mensaje. Sin Argumentos.</p>
-
-<p>Emitted exactly once for each message. No arguments. After
-emitted no other events will be emitted on the response.</p>
+<p>Se emite exactamente una vez por cada mensaje. Sin Argumentos.
+Despues de ser emitido, ningun otro evento será emitido en la respuesta.</p>
 
 <h3>response.statusCode</h3>
 
-<p>The 3-digit HTTP response status code. E.G. <code>404</code>.</p>
+<p>El códido de 3-digitos del estado de la respuesta. P.E. <code>404</code>.</p>
 
 <h3>response.httpVersion</h3>
 
-<p>The HTTP version of the connected-to server. Probably either
-<code>'1.1'</code> or <code>'1.0'</code>.
-Also <code>response.httpVersionMajor</code> is the first integer and
-<code>response.httpVersionMinor</code> is the second.</p>
+<p>La versión HTTP del servidor conectado. Provablemente <code>'1.1'</code> or <code>'1.0'</code>.</p>
+
+<p>También <code>response.httpVersionMajor</code> es el primer entero y
+<code>response.httpVersionMinor</code> es el segundo.</p>
 
 <h3>response.headers</h3>
 
-<p>The response headers object.</p>
+<p>El objeto headers de la respuesta.</p>
 
 <h3>response.setEncoding(encoding=null)</h3>
 
-<p>Set the encoding for the response body. Either <code>'utf8'</code>, <code>'ascii'</code>, or <code>'base64'</code>.
-Defaults to <code>null</code>, which means that the <code>'data'</code> event will emit a <code>Buffer</code> object..</p>
+<p>Establece la codificación de la respuesta del body. <code>'utf8'</code>, <code>'ascii'</code>, o <code>'base64'</code>.
+Por defecto es <code>null</code>, lo cual significa que el evento <code>'data'</code> emitirá un objeto <code>'Buffer'</code>.</p>
 
 <h3>response.pause()</h3>
 
-<p>Pauses response from emitting events.  Useful to throttle back a download.</p>
+<p>Hace una pausa en la respuesta desde la emisión de eventos. Útil para moderar la marcha de una descarga.</p>
 
 <h3>response.resume()</h3>
 
-<p>Resumes a paused response.</p>
+<p>Reanuna una pausa en la respuesta.</p>
 
 <h3>response.client</h3>
 
-<p>A reference to the <code>http.Client</code> that this response belongs to.</p>
+<p>Una referencia al <code>http.Client</code> a la cual pertenecea la respuesta.</p>
 
 <h2>net.Server</h2>
 
