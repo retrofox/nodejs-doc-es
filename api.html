@@ -1892,7 +1892,7 @@ followed by <code>response.end()</code>.</p>
 
 <p>Un cliente HTTP es construído con una dirección del servidor como argumento,
 el handle devuelto es luego usado para hacer una o más peticiones.
-En función del server conectado, el cliente puede pipeline(segmentar) las peticiones
+En función del servidor al cual se conecta, el cliente puede pipeline(segmentar) las peticiones
 o reestablecer el stream después de cada stream.
 <em>Actualmente la implementación no solicita el pipeline.</em></p>
 
@@ -1954,7 +1954,7 @@ como figura en http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/built
 Algunos headers adicionales del request pueden ser añadidos internamente por Node. Devuelve un objeto <code>ClientRequest</code>.</p>
 
 <p>Recuerda incluir el header <code>Content-Length</code> si planeas el envío completo de un body.
-Su la idea es el streaming del body, tal vez debas setear <code>Transfer-Encoding: chunked</code>.</p>
+Si la idea es el streaming del body, tal vez debas setear <code>Transfer-Encoding: chunked</code>.</p>
 
 <p><em>NOTA</em>: el request no está completo. Este método sólo envía el header de un request.
 Uno debe llamar <code>request.end()</code> para finalizar el request y obtener la respuesta.
@@ -3102,22 +3102,22 @@ about completing it.  <code>.break</code> will start over.</p></li>
 <li><p><code>.help</code> - Show this list of special commands.</p></li>
 </ul>
 
-<h2>Modules</h2>
+<h2>Módulos</h2>
 
-<p>Node uses the CommonJS module system.</p>
+<p>Node utiliza el sistema de módulos de CommonJS.</p>
 
-<p>Node has a simple module loading system.  In Node, files and modules are in
-one-to-one correspondence.  As an example, <code>foo.js</code> loads the module
-<code>circle.js</code> in the same directory.</p>
+<p>Node tiene un sencillo sistema de carga de módulos. En Node, los archivos y módulos
+tienen una correspondencia uno-a-uno. Por ejemplo, <code>foo.js' carga el módulo
+</code>circle.js` en el mismo directorio.</p>
 
-<p>The contents of <code>foo.js</code>:</p>
+<p>El contenido de <code>foo.js</code>:</p>
 
 <pre><code>var circle = require('./circle');
 console.log( 'The area of a circle of radius 4 is '
            + circle.area(4));
 </code></pre>
 
-<p>The contents of <code>circle.js</code>:</p>
+<p>El contenido de <code>circle.js</code>:</p>
 
 <pre><code>var PI = 3.14;
 
@@ -3130,25 +3130,24 @@ exports.circumference = function (r) {
 };
 </code></pre>
 
-<p>The module <code>circle.js</code> has exported the functions <code>area()</code> and
-<code>circumference()</code>.  To export an object, add to the special <code>exports</code>
-object.  (Alternatively, one can use <code>this</code> instead of <code>exports</code>.) Variables
-local to the module will be private. In this example the variable <code>PI</code> is
-private to <code>circle.js</code>. The function <code>puts()</code> comes from the module <code>'sys'</code>,
-which is a built-in module. Modules which are not prefixed by <code>'./'</code> are
-built-in module--more about this later.</p>
+<p>El módulo <code>circle.js</code> ha exportado las funciones <code>area()</code> y <code>circumference()</code>.</p>
 
-<p>A module prefixed with <code>'./'</code> is relative to the file calling <code>require()</code>.
-That is, <code>circle.js</code> must be in the same directory as <code>foo.js</code> for
-<code>require('./circle')</code> to find it.</p>
+<p>Para exportar un objeto, agregar el objeto especial <code>exports</code>. (Alternativamente,
+uno puede utilizar <code>this</code> en lugar de <code>exports</code>). Las variables locales del módulo serán privadas.
+En este ejemplo la variable <code>PI</code> es privada de <code>circle.js</code>. La función <code>puts()</code> viene desde el módulo <code>'sys'</code>,
+que es un módulo incorporado. Lo módulos que no están precedidos por <code>'./'</code>
+son incorporados en el módulo- más sobre esto más adelante.</p>
 
-<p>Without the leading <code>'./'</code>, like <code>require('assert')</code> the module is searched
-for in the <code>require.paths</code> array. <code>require.paths</code> on my system looks like
-this: </p>
+<p>Un módulo iniciado con <code>'./'</code> es relativo al archivo llamado con <code>require()</code>.
+Es decir, <code>circle.js</code> debe estar en el mismo directorio que <code>foo.js</code>para que
+<code>require()</code> lo pueda encontrar.</p>
+
+<p>Sin el apuntador <code>'./'</code>, como <code>require('assert'), el módulo es buscado dentro del array</code>require.paths<code>.
+En mi sistema</code>require.paths` es el siguiente:</p>
 
 <p><code>[ '/home/ryan/.node_libraries' ]</code></p>
 
-<p>That is, when <code>require('assert')</code> is called Node looks for: </p>
+<p>Es decir, cuando <code>require('assert')</code> es llamado Node busca:</p>
 
 <ul>
 <li>1: <code>/home/ryan/.node_libraries/assert.js</code></li>
@@ -3157,13 +3156,13 @@ this: </p>
 <li>4: <code>/home/ryan/.node_libraries/assert/index.node</code></li>
 </ul>
 
-<p>interrupting once a file is found. Files ending in <code>'.node'</code> are binary Addon
-Modules; see 'Addons' below. <code>'index.js'</code> allows one to package a module as
-a directory.</p>
+<p>interrumpiendo una vez que el archivo es encontrado. Los archivos que finalizan con
+<code>'node'</code> son módulos binarios Addon. Ver 'Addons' abajo. <code>'index.js'</code> permite
+empaquetar un módulo como una carpeta.</p>
 
-<p><code>require.paths</code> can be modified at runtime by simply unshifting new
-paths onto it, or at startup with the <code>NODE_PATH</code> environmental
-variable (which should be a list of paths, colon separated).</p>
+<p><code>require.paths</code> puede ser modificado en tiempo de ejecución simplemente
+unshifting (añadir al inicio de un array uno a más elementos) el nuevo path dentro de este,
+o en el startup con le variable de entorno <code>NODE_PATH</code> (la cual debe ser una lista de paths, separados por comas).</p>
 
 <h2>Addons</h2>
 
