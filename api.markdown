@@ -3153,7 +3153,7 @@ There are a few special REPL commands:
 Node utiliza el sistema de módulos de CommonJS.
 
 Node tiene un sencillo sistema de carga de módulos. En Node, los archivos y módulos
-tienen una correspondencia uno-a-uno. Por ejemplo, `foo.js' carga el módulo
+tienen una correspondencia uno-a-uno. Por ejemplo, `foo.js` carga el módulo
 `circle.js` en el mismo directorio.
 
 El contenido de `foo.js`:
@@ -3183,22 +3183,22 @@ que es un módulo incorporado. Lo módulos que no están precedidos por `'./'`
 son incorporados en el módulo- más sobre esto más adelante.
 
 Un módulo iniciado con `'./'` es relativo al archivo llamado con `require()`.
-Es decir, `circle.js` debe estar en el mismo directorio que `foo.js`para que
+Es decir, `circle.js` debe estar en el mismo directorio que `foo.js` para que
 `require()` lo pueda encontrar.
 
-Sin el apuntador `'./'`, como `require('assert'), el módulo es buscado dentro del array `require.paths`.
+Sin el apuntador `'./'`, como `require('assert')`, el módulo es buscado dentro del array `require.paths`.
 En mi sistema `require.paths` es el siguiente:
 
 `[ '/home/ryan/.node_libraries' ]`
 
-Es decir, cuando `require('assert')` es llamado Node busca:
+Es decir, cuando `require('assert')` es llamado Node busca ...
 
 * 1: `/home/ryan/.node_libraries/assert.js`
 * 2: `/home/ryan/.node_libraries/assert.node`
 * 3: `/home/ryan/.node_libraries/assert/index.js`
 * 4: `/home/ryan/.node_libraries/assert/index.node`
 
-interrumpiendo una vez que el archivo es encontrado. Los archivos que finalizan con
+... interrumpiendo una vez que el archivo es encontrado. Los archivos que finalizan con
 `'node'` son módulos binarios Addon. Ver 'Addons' abajo. `'index.js'` permite
 empaquetar un módulo como una carpeta.
 

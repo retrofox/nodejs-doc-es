@@ -3107,8 +3107,8 @@ about completing it.  <code>.break</code> will start over.</p></li>
 <p>Node utiliza el sistema de módulos de CommonJS.</p>
 
 <p>Node tiene un sencillo sistema de carga de módulos. En Node, los archivos y módulos
-tienen una correspondencia uno-a-uno. Por ejemplo, <code>foo.js' carga el módulo
-</code>circle.js` en el mismo directorio.</p>
+tienen una correspondencia uno-a-uno. Por ejemplo, <code>foo.js</code> carga el módulo
+<code>circle.js</code> en el mismo directorio.</p>
 
 <p>El contenido de <code>foo.js</code>:</p>
 
@@ -3139,15 +3139,15 @@ que es un módulo incorporado. Lo módulos que no están precedidos por <code>'.
 son incorporados en el módulo- más sobre esto más adelante.</p>
 
 <p>Un módulo iniciado con <code>'./'</code> es relativo al archivo llamado con <code>require()</code>.
-Es decir, <code>circle.js</code> debe estar en el mismo directorio que <code>foo.js</code>para que
+Es decir, <code>circle.js</code> debe estar en el mismo directorio que <code>foo.js</code> para que
 <code>require()</code> lo pueda encontrar.</p>
 
-<p>Sin el apuntador <code>'./'</code>, como <code>require('assert'), el módulo es buscado dentro del array</code>require.paths<code>.
-En mi sistema</code>require.paths` es el siguiente:</p>
+<p>Sin el apuntador <code>'./'</code>, como <code>require('assert')</code>, el módulo es buscado dentro del array <code>require.paths</code>.
+En mi sistema <code>require.paths</code> es el siguiente:</p>
 
 <p><code>[ '/home/ryan/.node_libraries' ]</code></p>
 
-<p>Es decir, cuando <code>require('assert')</code> es llamado Node busca:</p>
+<p>Es decir, cuando <code>require('assert')</code> es llamado Node busca ...</p>
 
 <ul>
 <li>1: <code>/home/ryan/.node_libraries/assert.js</code></li>
@@ -3156,7 +3156,7 @@ En mi sistema</code>require.paths` es el siguiente:</p>
 <li>4: <code>/home/ryan/.node_libraries/assert/index.node</code></li>
 </ul>
 
-<p>interrumpiendo una vez que el archivo es encontrado. Los archivos que finalizan con
+<p>... interrumpiendo una vez que el archivo es encontrado. Los archivos que finalizan con
 <code>'node'</code> son módulos binarios Addon. Ver 'Addons' abajo. <code>'index.js'</code> permite
 empaquetar un módulo como una carpeta.</p>
 
