@@ -20,3 +20,6 @@ Cuando un usuario se hace responsable de un capítulo implica (idealmente) que n
 * 2010-09-15	Damian Suarez
 		- HTTP
 		- http.Client
+
+* 2010-09-22	Damian Suarez
+		- Modules

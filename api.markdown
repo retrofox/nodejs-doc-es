@@ -3148,21 +3148,21 @@ There are a few special REPL commands:
   - `.help` - Show this list of special commands.
   
 
-## Modules
+## Módulos
 
-Node uses the CommonJS module system.
+Node utiliza el sistema de módulos de CommonJS.
 
-Node has a simple module loading system.  In Node, files and modules are in
-one-to-one correspondence.  As an example, `foo.js` loads the module
-`circle.js` in the same directory.
+Node tiene un sencillo sistema de carga de módulos. En Node, los archivos y módulos
+tienen una correspondencia uno-a-uno. Por ejemplo, `foo.js' carga el módulo
+`circle.js` en el mismo directorio.
 
-The contents of `foo.js`:
+El contenido de `foo.js`:
 
     var circle = require('./circle');
     console.log( 'The area of a circle of radius 4 is '
                + circle.area(4));
 
-The contents of `circle.js`:
+El contenido de `circle.js`:
 
     var PI = 3.14;
 
@@ -3174,38 +3174,37 @@ The contents of `circle.js`:
       return 2 * PI * r;
     };
 
-The module `circle.js` has exported the functions `area()` and
-`circumference()`.  To export an object, add to the special `exports`
-object.  (Alternatively, one can use `this` instead of `exports`.) Variables
-local to the module will be private. In this example the variable `PI` is
-private to `circle.js`. The function `puts()` comes from the module `'sys'`,
-which is a built-in module. Modules which are not prefixed by `'./'` are
-built-in module--more about this later.
+El módulo `circle.js` ha exportado las funciones `area()` y `circumference()`.
 
-A module prefixed with `'./'` is relative to the file calling `require()`.
-That is, `circle.js` must be in the same directory as `foo.js` for
-`require('./circle')` to find it.
+Para exportar un objeto, agregar el objeto especial `exports`. (Alternativamente,
+uno puede utilizar `this` en lugar de `exports`). Las variables locales del módulo serán privadas.
+En este ejemplo la variable `PI` es privada de `circle.js`. La función `puts()` viene desde el módulo `'sys'`,
+que es un módulo incorporado. Lo módulos que no están precedidos por `'./'`
+son incorporados en el módulo- más sobre esto más adelante.
 
-Without the leading `'./'`, like `require('assert')` the module is searched
-for in the `require.paths` array. `require.paths` on my system looks like
-this: 
+Un módulo iniciado con `'./'` es relativo al archivo llamado con `require()`.
+Es decir, `circle.js` debe estar en el mismo directorio que `foo.js`para que
+`require()` lo pueda encontrar.
+
+Sin el apuntador `'./'`, como `require('assert'), el módulo es buscado dentro del array `require.paths`.
+En mi sistema `require.paths` es el siguiente:
 
 `[ '/home/ryan/.node_libraries' ]`
 
-That is, when `require('assert')` is called Node looks for: 
+Es decir, cuando `require('assert')` es llamado Node busca:
 
 * 1: `/home/ryan/.node_libraries/assert.js`
 * 2: `/home/ryan/.node_libraries/assert.node`
 * 3: `/home/ryan/.node_libraries/assert/index.js`
 * 4: `/home/ryan/.node_libraries/assert/index.node`
 
-interrupting once a file is found. Files ending in `'.node'` are binary Addon
-Modules; see 'Addons' below. `'index.js'` allows one to package a module as
-a directory.
+interrumpiendo una vez que el archivo es encontrado. Los archivos que finalizan con
+`'node'` son módulos binarios Addon. Ver 'Addons' abajo. `'index.js'` permite
+empaquetar un módulo como una carpeta.
 
-`require.paths` can be modified at runtime by simply unshifting new
-paths onto it, or at startup with the `NODE_PATH` environmental
-variable (which should be a list of paths, colon separated).
+`require.paths` puede ser modificado en tiempo de ejecución simplemente
+unshifting (añadir al inicio de un array uno a más elementos) el nuevo path dentro de este,
+o en el startup con le variable de entorno `NODE_PATH` (la cual debe ser una lista de paths, separados por comas).
 
 
 ## Addons
